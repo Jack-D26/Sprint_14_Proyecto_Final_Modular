@@ -41,3 +41,89 @@ Esto permite mantener un código limpio, reutilizable y más fácil de escalar o
 ---
 
 > Para ejecutar los análisis, asegúrate de tener cargados `df_calls`, `df_clients`, y haber aplicado el preprocesamiento previo. Cada módulo puede ser importado o ejecutado de manera individual.
+
+---
+
+## Identificación de Operadores Ineficientes
+
+Esta fase tiene como objetivo identificar a los operadores con bajo desempeño mediante métricas clave y criterios definidos. El análisis incluye la creación de flags de ineficiencia, la visualización de resultados y un resumen interpretativo de los hallazgos.
+
+### Scripts involucrados (ubicados en scripts/identificacion_ineficaces/):
+
+#### metrics_operadores.py
+
+Contiene funciones para calcular las métricas clave por operador, así como para agregar la información del plan tarifario de cada uno.
+
+#### umbral_ineficiencia.py
+
+Define los umbrales que determinan cuándo un operador es considerado ineficiente, según:
+
+Tasa de llamadas perdidas
+
+Tiempo de espera promedio
+
+Número de llamadas salientes
+
+#### ineficiencia_visuals.py
+
+Genera visualizaciones relacionadas con:
+
+Proporción de ineficientes vs eficientes
+
+Distribución por plan tarifario
+
+Criterios de ineficiencia cumplidos
+
+Histograma de carga operativa
+
+#### resumen_ineficiencia.py
+
+Calcula estadísticas globales (como proporción de ineficiencia) y destaca hallazgos relevantes del análisis, como sobrecarga por plan tarifario.
+
+### Cómo ejecutar esta fase
+
+En tu notebook principal, importa las funciones de la siguiente manera:
+
+from scripts.identificacion_ineficaces.metrics_operadores import (
+calcular_metricas_por_operador,
+agregar_plan_tarifario
+)
+from scripts.identificacion_ineficaces.umbral_ineficiencia import (
+calcular_umbral_ineficiencia,
+etiquetar_ineficiencia
+)
+from scripts.identificacion_ineficaces.ineficiencia_visuals import (
+plot_ineficientes_por_criterios,
+plot_ineficiencia_por_plan,
+plot_torta_ineficiencia,
+plot_hist_total_llamadas,
+plot_criterios_mas_frecuentes
+)
+from scripts.identificacion_ineficaces.resumen_ineficiencia import (
+calcular_resumen_ineficiencia
+)
+
+Luego, puedes ejecutar paso a paso la lógica como se planteó originalmente en el .ipynb para obtener métricas, aplicar criterios y visualizar resultados.
+
+### Requisitos previos para ejecutar esta fase
+
+Para poder utilizar los scripts de la fase de Identificación de operadores ineficientes, es necesario que el DataFrame de llamadas (df) ya cuente con las siguientes columnas generadas previamente durante la fase de preprocesamiento y EDA:
+
+missed_call: Columna booleana que indica si la llamada fue perdida (True si el tiempo de espera fue mayor a 0 y la duración de la llamada es 0).
+
+wait_time: Tiempo de espera antes de ser atendido (en segundos).
+
+call_duration: Duración total de la llamada (en segundos).
+
+direction: Dirección de la llamada ('in' o 'out').
+
+user_id: Identificador único del operador (necesario para hacer merge con el plan tarifario desde df_clients).
+
+Estas columnas se generan mediante scripts de la fase de EDA ubicados en scripts/eda/.
+Asegúrate de haber ejecutado los siguientes scripts antes de esta etapa:
+
+eda_llamadas_perdidas.py
+
+eda_tiempos.py
+
+---
