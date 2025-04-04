@@ -163,3 +163,51 @@ prueba_planes_tarifarios(df_calls_no_outliers, df_clients)
 prueba_antiguedad_eficiencia(df_calls_no_outliers, df_clients, operator_perf)
 prueba_comparacion_operadores(operator_perf)
 ```
+
+---
+
+## Visualización y Presentación de Resultados
+
+Esta fase incluye la generación de gráficos y tablas clave que resumen el desempeño de los operadores, identifican patrones operativos y respaldan los hallazgos obtenidos en las fases anteriores. No depende de funciones externas, pero requiere que los DataFrames utilizados ya contengan las columnas generadas previamente (ver fase de identificación).
+
+### Requisitos previos
+
+El DataFrame principal (operator_perf) debe contener al menos las siguientes columnas:
+
+operator_id
+
+missed_calls
+
+missed_rate
+
+avg_wait_time
+
+avg_call_duration
+
+total_calls, total_incoming, total_outgoing
+
+ineficiente_missed, ineficiente_wait, ineficiente_outgoing
+
+criterios_cumplidos, es_ineficiente
+
+tariff_plan
+
+Además, se usa df_calls_no_outliers para obtener datos crudos y construir ciertos gráficos como la distribución de tiempos de espera.
+
+### Lo que se incluye en esta fase
+
+Top 15 operadores con más llamadas perdidas (con y sin NA)
+
+Distribución de tiempos de espera por operador
+
+Matriz de correlación entre variables clave
+
+Histograma de llamadas salientes
+
+Tablas de clasificación de operadores (ranking)
+
+Comparación agregada por plan tarifario
+
+### Ejecución
+
+Puedes ejecutar el script completo de esta fase tras haber corrido los scripts de identificación. Asegúrate de tener cargado operator_perf con las columnas listadas arriba, y df_calls_no_outliers si aplicas los gráficos detallados.
