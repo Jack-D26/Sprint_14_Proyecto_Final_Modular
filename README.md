@@ -127,3 +127,39 @@ eda_llamadas_perdidas.py
 eda_tiempos.py
 
 ---
+
+---
+
+## 🧪 Pruebas de hipótesis
+
+El script `pruebas_hipotesis.py` contiene una serie de análisis estadísticos diseñados para validar suposiciones clave sobre el comportamiento de los operadores, como:
+
+- Relación entre número de llamadas entrantes y tasa de abandono.
+- Asociación entre tiempo de espera promedio y pérdida de llamadas.
+- Comparación del desempeño entre planes tarifarios mediante Kruskal-Wallis.
+- Análisis de eficiencia en función de la antigüedad de los operadores.
+- Comparación entre operadores eficientes e ineficientes usando pruebas de Mann-Whitney.
+
+### Tabla de hipótesis
+
+| Hipótesis                                                             | Prueba aplicada | Variable principal                  |
+| --------------------------------------------------------------------- | --------------- | ----------------------------------- |
+| Mayor volumen de llamadas entrantes genera mayor tasa de abandono     | Pearson         | `missed_rate` vs. `total_incoming`  |
+| Mayor tiempo de espera se relaciona con más abandono                  | Pearson         | `missed_rate` vs. `wait_time_mean`  |
+| El plan tarifario afecta la tasa de llamadas perdidas                 | Kruskal-Wallis  | `missed_rate` por plan              |
+| La antigüedad del operador impacta su eficiencia                      | Pearson         | `missed_rate` vs. antigüedad (días) |
+| Existen diferencias claras entre operadores eficientes e ineficientes | Mann-Whitney    | `missed_rate` y `avg_wait_time`     |
+
+#### Cómo ejecutar esta fase
+
+Asegúrate de contar con los DataFrames `operator_perf`, `df_clients` y `df_calls_no_outliers`.
+
+```python
+from scripts.pruebas_hipotesis import *
+
+prueba_correlacion_entrantes_missed(operator_perf)
+prueba_correlacion_espera_missed(df_calls_no_outliers, operator_perf)
+prueba_planes_tarifarios(df_calls_no_outliers, df_clients)
+prueba_antiguedad_eficiencia(df_calls_no_outliers, df_clients, operator_perf)
+prueba_comparacion_operadores(operator_perf)
+```
