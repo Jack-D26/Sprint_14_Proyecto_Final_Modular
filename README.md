@@ -130,7 +130,7 @@ eda_tiempos.py
 
 ---
 
-## 🧪 Pruebas de hipótesis
+## Pruebas de hipótesis
 
 El script `pruebas_hipotesis.py` contiene una serie de análisis estadísticos diseñados para validar suposiciones clave sobre el comportamiento de los operadores, como:
 
