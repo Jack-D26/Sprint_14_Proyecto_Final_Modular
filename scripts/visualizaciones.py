@@ -1,6 +1,6 @@
 # scripts/visualizaciones.py
 
-import pandas as pd
+import pandas as pd # TODO Revisar si vas a usar pandas acá. Si no, borrar esta línea
 import matplotlib.pyplot as plt
 import seaborn as sns
 
