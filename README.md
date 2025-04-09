@@ -211,3 +211,15 @@ Comparación agregada por plan tarifario
 ### Ejecución
 
 Puedes ejecutar el script completo de esta fase tras haber corrido los scripts de identificación. Asegúrate de tener cargado operator_perf con las columnas listadas arriba, y df_calls_no_outliers si aplicas los gráficos detallados.
+
+<!-- TODO Explicitar cómo ejecutar el código del proyecto de principio a fin 
+```py
+python pipeline.py --fecha "YYYY-MM-DD"
+``` -->
+<!-- TODO Que cada script genere inputs y outputs -->
+<!-- TODO Agregar logs -->
+<!-- TODO Crear pipeline -->
+<!-- TODO Agregar link a dashboard -->
+<!-- TODO Documentar cómo ejecutar y otros temas -->
+
+
