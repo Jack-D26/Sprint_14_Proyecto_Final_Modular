@@ -3,7 +3,7 @@
 import pandas as pd
 
 
-def convertir_tipos(df_clients, df_calls):
+def convertir_tipos(df_clients, df_calls): # TODO mejorar docstrings en todas las fucniones usando IA
     """
     Convierte tipos de datos en ambos DataFrames.
     """
